@@ -1,9 +1,35 @@
+.con {
+  width: 800px;
+  height: 400px;
+}
+
+.main {
+  padding: 2%;
+  width: auto;
+  margin: 20px 100px 20px 100px;
+  background: rgb(255, 255, 255);
+  border: 0 solid black;
+  border-radius: 30px;
+  background-color: black;
+}
+
 .grid {
   position: absolute;
   width: 570px;
   height: 300px;
   margin: 15 auto;
   border: solid red 1px;
+  margin-left: 15px;
+  float: left;
+}
+
+.highscoreBoard {
+  width: 200px;
+  height: 400px;
+  margin: 15 auto;
+  border: solid red 1px;
+  float: right;
+  background: rgb(81, 85, 143);
 }
 
 .block {

@@ -1,5 +1,6 @@
 const grid = document.querySelector('.grid')
 const score = document.querySelector('.score')
+const startButton = document.querySelector('#startBtn')
 
 const blkW = 100
 const blkH = 20
@@ -58,6 +59,15 @@ const polluteGrid = () => {
 }
 polluteGrid()
 
+
+startButton.addEventListener('click', () => {
+  // HERE
+  document.addEventListener('keydown', moveController)
+  // HERE
+  intervalID = setInterval(moveBall, 20)
+})
+
+
 const controller = document.createElement('div')
 controller.classList.add('controller')
 drawController()
@@ -82,7 +92,7 @@ const moveController = (e) => {
     document.location.reload()
   }
 }
-document.addEventListener('keydown', moveController)
+
 
 
 const ball = document.createElement('div')
@@ -101,7 +111,6 @@ function moveBall() {
   drawBall()
   solveCollisions()
 }
-intervalID = setInterval(moveBall, 20)
 
 
 function solveCollisions() {
@@ -111,18 +120,22 @@ function solveCollisions() {
       (ballCurrentPosition[0] > blocks[i].bottomLeft[0] && ballCurrentPosition[0] < blocks[i].bottomRight[0]) &&
       ((ballCurrentPosition[1] + ballDiameter) > blocks[i].bottomLeft[1] && ballCurrentPosition[1] < blocks[i].topLeft[1])
     ) {
+
+      const blks = Array.from(document.querySelectorAll('.block'))
+      blks[i].classList.remove('block')
+      blocks.splice(i, 1)
+      hits++
+      score.innerText = 'Score: ' + hits + ' points'
+      changeTrajectory()
+
       if (blocks.length === 0) {
         score.innerText = 'You win!'
+        score.style.backgroundColor = randomRGB()
         clearInterval(intervalID)
         document.removeEventListener('keydown', moveController)
-      } else {
-        const blks = Array.from(document.querySelectorAll('.block'))
-        blks[i].classList.remove('block')
-        blocks.splice(i, 1)
-        hits++
-        score.innerText = 'Score: ' + hits + ' points'
-        changeTrajectory()
+        // document.location.reload()
       }
+
     }
   }
 
@@ -138,6 +151,7 @@ function solveCollisions() {
     score.innerText = 'You Lose'
     clearInterval(intervalID)
     document.removeEventListener('keydown', moveController)
+    document.location.reload()
   }
 
   if ((ballCurrentPosition[0] > currentPosition[0] && ballCurrentPosition[0] < currentPosition[0] + blkW)
@@ -145,6 +159,13 @@ function solveCollisions() {
     changeTrajectory()
   }
 
+}
+
+const randomRGB = () => {
+  let r = Math.floor(Math.random() * 255)
+  let g = Math.floor(Math.random() * 255)
+  let b = Math.floor(Math.random() * 255)
+  return `rgb(${r},${g},${b})`
 }
 
 function changeTrajectory() {
