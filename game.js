@@ -3,8 +3,12 @@ const grid = document.querySelector('.grid')
 const blkW = 100
 const blkH = 20
 
-const controllerPOS = [230, 10] // 570px/2 = 285px - blkW
+const controllerPOS = [230, 10] // 570px/2 = 285px - blkW/2
 let currentPosition = controllerPOS
+
+const ballStart = [270, 30]
+let ballCurrentPosition = ballStart
+
 
 class Block {
   constructor(x, y) {
@@ -42,11 +46,9 @@ const polluteGrid = () => {
     blk.style.left = blocks[i].bottomLeft[0] + 'px'
     blk.style.bottom = blocks[i].bottomLeft[1] + 'px'
     blk.style.backgroundColor = 'red'
-
     grid.appendChild(blk)
   }
 }
-
 polluteGrid()
 
 const controller = document.createElement('div')
@@ -55,12 +57,11 @@ draw()
 grid.appendChild(controller)
 
 function draw() {
-  controller.style.left = controllerPOS[0] + 'px'
-  controller.style.bottom = controllerPOS[1] + 'px'
+  controller.style.left = currentPosition[0] + 'px'
+  controller.style.bottom = currentPosition[1] + 'px'
 }
 
-document.addEventListener('keydown', (e) => {
-
+const moveController = (e) => {
   if (e.key === 'ArrowLeft' && currentPosition[0] > 0) {
     //  move controller 10 px left at each keydown
     currentPosition[0] -= 10
@@ -70,5 +71,12 @@ document.addEventListener('keydown', (e) => {
     currentPosition[0] += 10
     draw()
   }
+}
 
-})
+document.addEventListener('keydown', moveController)
+
+const ball = document.createElement('div')
+ball.classList.add('ball')
+ball.style.left = ballCurrentPosition[0] + 'px'
+ball.style.bottom = ballCurrentPosition[1] + 'px'
+grid.appendChild(ball)
