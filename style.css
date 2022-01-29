@@ -2,6 +2,7 @@
   position: absolute;
   width: 570px;
   height: 300px;
+  margin: 15 auto;
   border: solid red 1px;
 }
 

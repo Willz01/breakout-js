@@ -1,6 +1,7 @@
 const grid = document.querySelector('.grid')
 const score = document.querySelector('.score')
 
+
 const blkW = 100
 const blkH = 20
 
@@ -12,7 +13,7 @@ let ballCurrentPosition = ballStart
 const ballDiameter = 20
 
 let timerID
-let xD = -2
+let xD = 2
 let yD = 2
 let hits = 0
 
