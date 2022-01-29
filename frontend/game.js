@@ -1,7 +1,6 @@
 const grid = document.querySelector('.grid')
 const score = document.querySelector('.score')
 
-
 const blkW = 100
 const blkH = 20
 
@@ -12,7 +11,7 @@ const ballStart = [270, 30]
 let ballCurrentPosition = ballStart
 const ballDiameter = 20
 
-let timerID
+let intervalID
 let xD = 2
 let yD = 2
 let hits = 0
@@ -83,7 +82,6 @@ const moveController = (e) => {
     document.location.reload()
   }
 }
-
 document.addEventListener('keydown', moveController)
 
 
@@ -103,7 +101,7 @@ function moveBall() {
   drawBall()
   solveCollisions()
 }
-timerID = setInterval(moveBall, 20)
+intervalID = setInterval(moveBall, 20)
 
 
 function solveCollisions() {
@@ -113,22 +111,21 @@ function solveCollisions() {
       (ballCurrentPosition[0] > blocks[i].bottomLeft[0] && ballCurrentPosition[0] < blocks[i].bottomRight[0]) &&
       ((ballCurrentPosition[1] + ballDiameter) > blocks[i].bottomLeft[1] && ballCurrentPosition[1] < blocks[i].topLeft[1])
     ) {
-      const blks = Array.from(document.querySelectorAll('.block'))
-      blks[i].classList.remove('block')
-      blocks.splice(i, 1)
-      hits++
-      score.innerText = 'Score: ' + hits + ' points'
-      changeTrajectory()
-
       if (blocks.length === 0) {
         score.innerText = 'You win!'
-        clearInterval(timerID)
+        clearInterval(intervalID)
         document.removeEventListener('keydown', moveController)
+      } else {
+        const blks = Array.from(document.querySelectorAll('.block'))
+        blks[i].classList.remove('block')
+        blocks.splice(i, 1)
+        hits++
+        score.innerText = 'Score: ' + hits + ' points'
+        changeTrajectory()
       }
-
     }
-
   }
+
   // wall collision
   if (ballCurrentPosition[0] >= (570 - ballDiameter) || ballCurrentPosition[1] >= (300 - ballDiameter)
     || ballCurrentPosition[0] <= 0
@@ -136,9 +133,10 @@ function solveCollisions() {
     changeTrajectory()
   }
 
+  // ball out bottom
   if (ballCurrentPosition[1] <= 0) {
     score.innerText = 'You Lose'
-    clearInterval(timerID)
+    clearInterval(intervalID)
     document.removeEventListener('keydown', moveController)
   }
 
@@ -166,5 +164,4 @@ function changeTrajectory() {
     yD = 2
     return
   }
-
 }
