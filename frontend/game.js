@@ -130,12 +130,12 @@ function solveCollisions() {
 
       if (blocks.length === 0) {
         score.innerText = 'You win!'
-        score.style.backgroundColor = randomRGB()
-        clearInterval(intervalID)
+        setTimeout(() => {
+          score.style.backgroundColor = randomRGB()
+          document.location.reload()
+        }, 3000)
         document.removeEventListener('keydown', moveController)
-        // document.location.reload()
       }
-
     }
   }
 
@@ -161,7 +161,7 @@ function solveCollisions() {
 
 }
 
-const randomRGB = () => {
+function randomRGB() {
   let r = Math.floor(Math.random() * 255)
   let g = Math.floor(Math.random() * 255)
   let b = Math.floor(Math.random() * 255)

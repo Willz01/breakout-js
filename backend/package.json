@@ -1,0 +1,22 @@
+{
+  "name": "breakout-score-logger",
+  "version": "1.0.0",
+  "description": "Web course lab 1",
+  "main": "app.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Willz01/breakout-js.git"
+  },
+  "author": "Willz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Willz01/breakout-js/issues"
+  },
+  "homepage": "https://github.com/Willz01/breakout-js#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
