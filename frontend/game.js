@@ -69,6 +69,7 @@ polluteGrid()
 startForm.addEventListener('submit', (event) => {
   event.preventDefault()
   userName = document.querySelector('#name').value
+  // postScore({ name: userName, score: "13" })
   console.log(userName);
   // HERE
   document.addEventListener('keydown', moveController)
@@ -138,9 +139,8 @@ function solveCollisions() {
       changeTrajectory()
 
       if (blocks.length === 0) {
-        scoreValue = 15
         score.innerText = 'You win!'
-        postScore({ userName, scoreValue })
+        postScore({ name: userName, score: hits })
         setTimeout(() => {
           score.style.backgroundColor = randomRGB()
           document.location.reload()
@@ -159,8 +159,7 @@ function solveCollisions() {
 
   // ball out bottom
   if (ballCurrentPosition[1] <= 0) {
-    scoreValue = blocks.length
-    postScore({ userName, scoreValue })
+    postScore({ name: userName, score: hits })
     score.innerText = 'You Lose'
     clearInterval(intervalID)
     document.removeEventListener('keydown', moveController)
