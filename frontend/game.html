@@ -14,8 +14,16 @@
 
 <body class="body">
   <main class="main">
-    <h1 class="d-inline p-2 bg-primary text-white display-6, score">Score</h1>
-    <button type="button" class="btn btn-outline-danger" id="startBtn">Start</button>
+    <div class="header">
+      <h1 class="d-inline p-2 bg-primary text-white display-6, score">Score</h1>
+
+      <form action="#" id="startForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <button type="submit" class="btn btn-outline-danger">Start</button>
+      </form>
+    </div>
+
     <div class="con">
       <div class="grid"></div>
       <div class="highscoreBoard">

@@ -1,6 +1,11 @@
 const grid = document.querySelector('.grid')
 const score = document.querySelector('.score')
 const startButton = document.querySelector('#startBtn')
+const startForm = document.forms["startForm"];
+
+// import { postScore } from './highscore';
+
+console.log(startForm);
 
 const blkW = 100
 const blkH = 20
@@ -13,6 +18,7 @@ let ballCurrentPosition = ballStart
 const ballDiameter = 20
 
 let intervalID
+let userName, scoreValue
 let xD = 2
 let yD = 2
 let hits = 0
@@ -60,7 +66,10 @@ const polluteGrid = () => {
 polluteGrid()
 
 
-startButton.addEventListener('click', () => {
+startForm.addEventListener('submit', (event) => {
+  event.preventDefault()
+  userName = document.querySelector('#name').value
+  console.log(userName);
   // HERE
   document.addEventListener('keydown', moveController)
   // HERE
@@ -129,7 +138,9 @@ function solveCollisions() {
       changeTrajectory()
 
       if (blocks.length === 0) {
+        scoreValue = 15
         score.innerText = 'You win!'
+        postScore({ userName, scoreValue })
         setTimeout(() => {
           score.style.backgroundColor = randomRGB()
           document.location.reload()
@@ -148,6 +159,8 @@ function solveCollisions() {
 
   // ball out bottom
   if (ballCurrentPosition[1] <= 0) {
+    scoreValue = blocks.length
+    postScore({ userName, scoreValue })
     score.innerText = 'You Lose'
     clearInterval(intervalID)
     document.removeEventListener('keydown', moveController)

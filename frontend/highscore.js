@@ -1,23 +1,24 @@
 const scoreGrid = document.querySelector('.highscoreBoard')
 
-function fillBoard() {
-  let name = "Wills"
-  let score = 11
 
-  const scoreDiv = document.createElement('div')
-  scoreDiv.style.width = 'auto'
-  scoreDiv.style.height = '30px'
-  scoreDiv.style.border = 'solid yellow 1px'
-  scoreDiv.style.margin = '4px'
+async function fillBoard() {
+  const userScores = await fetchHighScores()
+  for (let user of userScores) {
+    const scoreDiv = document.createElement('div')
+    scoreDiv.style.width = 'auto'
+    scoreDiv.style.height = '30px'
+    scoreDiv.style.border = 'solid yellow 1px'
+    scoreDiv.style.margin = '4px'
 
-  const text = name + ': ' + score
-  const h4 = document.createElement('h4')
-  h4.innerHTML = `<i>${text}</i>`
-  h4.style.fontSize = '1rem'
-  h4.style.textAlign = 'center'
-  scoreDiv.appendChild(h4)
+    const text = user.name + ': ' + user.score
+    const h4 = document.createElement('h4')
+    h4.innerHTML = `<i>${text}</i>`
+    h4.style.fontSize = '1rem'
+    h4.style.textAlign = 'center'
+    scoreDiv.appendChild(h4)
 
-  scoreGrid.appendChild(scoreDiv)
+    scoreGrid.appendChild(scoreDiv)
+  }
 }
 
 fillBoard()
@@ -30,15 +31,12 @@ async function fetchHighScores() {
 }
 
 async function postScore(data = {}) {
-  const url = 'http://localhost:4444/scores'
-  const score = await fetch(url, {
-    method: 'POST',
-    mode: 'no cors',
-    headers: {
-      'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: JSON.stringify(data)
-  });
-  return score.json();
+  let url = 'http://localhost:4444/scores/' + data.name + '/' + data.score
+  let raw = await fetch(url);
+  let profile = await raw.json()
+  return profile
 }
+
+
+// postScore({ name: "Wills", score: 12 })
+
