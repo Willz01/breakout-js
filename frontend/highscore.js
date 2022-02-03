@@ -9,6 +9,7 @@ async function fillBoard() {
   title.style.color = randomRGB()
   scoreGrid.appendChild(title)
 
+  userScores.sort((a, b) => a.score > b.score ? -1 : 1)
 
   for (let user of userScores) {
     const scoreDiv = document.createElement('div')
@@ -32,6 +33,17 @@ async function fillBoard() {
 }
 
 fillBoard()
+
+function sort(prop) {
+  return function (a, b) {
+    if (a[prop] > b[prop]) {
+      return -1;
+    } else if (a[prop] < b[prop]) {
+      return 1;
+    }
+    return 0;
+  }
+}
 
 async function fetchHighScores() {
   let raw = await fetch('http://localhost:4444/scores')

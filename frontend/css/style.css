@@ -13,9 +13,19 @@
 }
 
 .main {
-  padding: 2%;
+  padding: 1%;
   width: auto;
   margin: 20px 100px 20px 100px;
+  background: rgb(255, 255, 255);
+  border: 3px solid black;
+  border-radius: 30px;
+  background-color: rgb(64, 51, 119);
+}
+
+.footer {
+  padding: 1%;
+  width: auto;
+  margin: 20px 100px 0 100px;
   background: rgb(255, 255, 255);
   border: 3px solid black;
   border-radius: 30px;
