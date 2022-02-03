@@ -17,7 +17,7 @@
   width: auto;
   margin: 20px 100px 20px 100px;
   background: rgb(255, 255, 255);
-  border: 0 solid black;
+  border: 3px solid black;
   border-radius: 30px;
   background-color: rgb(64, 51, 119);
 }
@@ -34,7 +34,7 @@
 
 .highscoreBoard {
   width: 200px;
-  height: 400px;
+  height: 300px;
   margin: 15 auto;
   border: solid red 1px;
   float: right;
@@ -55,6 +55,7 @@
   width: 100px;
   height: 20px;
   background-color: green;
+  border: 2px solid black;
   /* left: 50px;
   bottom: 50px; */
 }

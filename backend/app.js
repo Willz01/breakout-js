@@ -26,7 +26,6 @@ app.get("/scores", scoresDB.getAllScores)
 
 app.get("/scores/:name/:score", scoresDB.addScore)
 
-
 app.listen(PORT, () => {
   console.log(`Breakout logger running at PORT: ${PORT}`);
 })

@@ -1,14 +1,24 @@
 const scoreGrid = document.querySelector('.highscoreBoard')
-
+scoreGrid.classList.add('overflow-auto')
 
 async function fillBoard() {
   const userScores = await fetchHighScores()
+  const title = document.createElement('h4')
+  title.innerText = 'Highscores'
+  title.style.textAlign = 'center'
+  title.style.color = randomRGB()
+  scoreGrid.appendChild(title)
+
+
   for (let user of userScores) {
     const scoreDiv = document.createElement('div')
     scoreDiv.style.width = 'auto'
     scoreDiv.style.height = '30px'
     scoreDiv.style.border = 'solid yellow 1px'
     scoreDiv.style.margin = '4px'
+    scoreDiv.addEventListener('mouseenter', () => {
+      scoreDiv.style.backgroundColor = randomRGB()
+    })
 
     const text = user.name + ': ' + user.score
     const h4 = document.createElement('h4')

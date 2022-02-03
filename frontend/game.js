@@ -68,7 +68,8 @@ polluteGrid()
 
 startForm.addEventListener('submit', (event) => {
   event.preventDefault()
-  userName = document.querySelector('#name').value
+  let formdata = new FormData(startForm);
+  userName = formdata.get("username")
   // postScore({ name: userName, score: "13" })
   console.log(userName);
   // HERE
@@ -140,12 +141,12 @@ function solveCollisions() {
 
       if (blocks.length === 0) {
         score.innerText = 'You win!'
-        postScore({ name: userName, score: hits })
-        setTimeout(() => {
-          score.style.backgroundColor = randomRGB()
-          document.location.reload()
-        }, 3000)
         document.removeEventListener('keydown', moveController)
+        postScore({ name: userName, score: hits })
+
+        document.location.reload()
+
+
       }
     }
   }
