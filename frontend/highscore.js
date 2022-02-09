@@ -1,15 +1,15 @@
 const scoreGrid = document.querySelector('.highscoreBoard')
+
 scoreGrid.classList.add('overflow-auto')
 
 async function fillBoard() {
-  const userScores = await fetchHighScores()
+  let userScores = await fetchHighScores()
   const title = document.createElement('h4')
   title.innerText = 'Highscores'
   title.style.textAlign = 'center'
   title.style.color = randomRGB()
   scoreGrid.appendChild(title)
 
-  userScores.sort((a, b) => a.score > b.score ? -1 : 1)
 
   for (let user of userScores) {
     const scoreDiv = document.createElement('div')
@@ -46,14 +46,14 @@ function sort(prop) {
 }
 
 async function fetchHighScores() {
-  let raw = await fetch('http://localhost:4444/scores')
+  let raw = await fetch('http://localhost:4443/scores')
   let scores = await raw.json()
   console.log(scores);
   return scores;
 }
 
 async function postScore(data = {}) {
-  let url = 'http://localhost:4444/scores/' + data.name + '/' + data.score
+  let url = 'http://localhost:4443/scores/' + data.name + '/' + data.score
   let raw = await fetch(url);
   let profile = await raw.json()
   return profile

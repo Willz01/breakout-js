@@ -14,7 +14,8 @@
 
 .main {
   padding: 1%;
-  width: auto;
+  align-content: center;
+  width: 75%;
   margin: 20px 100px 20px 100px;
   background: rgb(255, 255, 255);
   border: 3px solid black;
@@ -24,7 +25,7 @@
 
 .footer {
   padding: 1%;
-  width: auto;
+  width: 75%;
   margin: 20px 100px 0 100px;
   background: rgb(255, 255, 255);
   border: 3px solid black;
@@ -42,8 +43,14 @@
   float: left;
 }
 
+.score {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  padding-left: 200px;
+}
+
 .highscoreBoard {
-  width: 200px;
+  width: fit-content;
   height: 300px;
   margin: 15 auto;
   border: solid red 1px;
