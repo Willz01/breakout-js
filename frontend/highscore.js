@@ -2,9 +2,11 @@ const scoreGrid = document.querySelector('.highscoreBoard')
 
 scoreGrid.classList.add('overflow-auto')
 
+// fill highscore board with read high scores
 async function fillBoard() {
   let userScores = await fetchHighScores()
-  const title = document.createElement('h4')
+
+  const title = document.createElement('h4') // HIGHSCORE -description
   title.innerText = 'Highscores'
   title.style.textAlign = 'center'
   title.style.color = randomRGB()
@@ -12,7 +14,7 @@ async function fillBoard() {
 
 
   for (let user of userScores) {
-    const scoreDiv = document.createElement('div')
+    const scoreDiv = document.createElement('div')  // single score div
     scoreDiv.style.width = 'auto'
     scoreDiv.style.height = '30px'
     scoreDiv.style.border = 'solid yellow 1px'
@@ -22,7 +24,7 @@ async function fillBoard() {
     })
 
     const text = user.name + ': ' + user.score
-    const h4 = document.createElement('h4')
+    const h4 = document.createElement('h4') // username and score
     h4.innerHTML = `<i>${text}</i>`
     h4.style.fontSize = '1rem'
     h4.style.textAlign = 'center'
@@ -34,17 +36,7 @@ async function fillBoard() {
 
 fillBoard()
 
-function sort(prop) {
-  return function (a, b) {
-    if (a[prop] > b[prop]) {
-      return -1;
-    } else if (a[prop] < b[prop]) {
-      return 1;
-    }
-    return 0;
-  }
-}
-
+// fetch sorted highscores list from backend server (app.js)
 async function fetchHighScores() {
   let raw = await fetch('http://localhost:4443/scores')
   let scores = await raw.json()
@@ -52,6 +44,7 @@ async function fetchHighScores() {
   return scores;
 }
 
+// post new scores to backend
 async function postScore(data = {}) {
   let url = 'http://localhost:4443/scores/' + data.name + '/' + data.score
   let raw = await fetch(url);

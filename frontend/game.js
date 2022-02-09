@@ -1,9 +1,9 @@
-const grid = document.querySelector('.grid')
-const score = document.querySelector('.score')
-const startButton = document.querySelector('#startBtn')
-const startForm = document.forms["startForm"];
+const grid = document.querySelector('.grid') // game box
+const score = document.querySelector('.score') // score display
 
-// import { postScore } from './highscore';
+
+const startForm = document.forms["startForm"]; // start button -> form
+
 
 console.log(startForm);
 
@@ -21,7 +21,7 @@ let intervalID
 let userName, scoreValue
 let xD = 2
 let yD = 2
-let hits = 0
+let hits = 0  // number of hits
 
 
 class Block {
@@ -89,7 +89,6 @@ function drawController() {
   controller.style.bottom = currentPosition[1] + 'px'
 }
 
-
 const moveController = (e) => {
   if (e.key === 'ArrowLeft' && currentPosition[0] > 0) {
     //  move controller 10 px left at each keydown
@@ -103,8 +102,6 @@ const moveController = (e) => {
     document.location.reload()
   }
 }
-
-
 
 const ball = document.createElement('div')
 ball.classList.add('ball')
@@ -181,6 +178,7 @@ function randomRGB() {
   return `rgb(${r},${g},${b})`
 }
 
+// change ball trajectory
 function changeTrajectory() {
   if (xD === 2 && yD === 2) {
     yD = -2
